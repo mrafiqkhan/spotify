@@ -63,3 +63,5 @@ typings/
 .vscode/
 gulpfile.js
 scss/
+
+package-lock.json
