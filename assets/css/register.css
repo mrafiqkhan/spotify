@@ -1,0 +1,162 @@
+#background {
+  background: #000 url('../images/bg.jpg');
+  background-size: cover;
+  display: table;
+  width: 100%;
+  min-height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#loginContainer * {
+  color: #fff;
+}
+
+#loginContainer {
+  /* width: 80%; */
+  margin: 0 auto;
+  position: relative;
+  max-width: 1024px;
+}
+
+#loginContainer>div {
+  display: block;
+}
+
+#inputContainer {
+  width: 45%;
+  padding: 20px 45px;
+  padding-bottom: 0;
+  float: left;
+  border-right: 1px solid rgba(153, 153, 153, 0.452);
+}
+
+#inputContainer h2 {
+  text-align: center;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid #fff;
+  height: 27px;
+  line-height: 27px;
+  width: 100%;
+}
+
+input[type="text"]:blur,
+input[type="email"]:blur,
+input[type="password"]:blur {
+  background: url("../images/checked.png");
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+button {
+  outline: none;
+}
+
+/* :-moz-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder, */
+
+::-webkit-input-placeholder {
+  color: rgba(196, 245, 196, 0.342);
+  font-size: 12px;
+}
+
+#inputContainer label {
+  color: rgba(136, 227, 255, 0.719);
+  font-size: 15px;
+  margin-top: 15px;
+}
+
+#inputContainer [type="submit"] {
+  display: block;
+  border: none;
+  border-radius: 250px;
+  padding: 7px 14px;
+  min-width: 60%;
+  margin: 17px auto;
+  /* margin-top: 10px; */
+  background: transparent;
+  border: 2px solid rgb(93, 219, 131);
+}
+
+#inputContainer [type="submit"]:hover {
+  border: 2px solid rgb(93, 219, 131);
+  background-color: rgb(98, 241, 141);
+}
+
+#inputContainer .hasAccountText {
+  font-size: 12px;
+  font-weight: bold;
+  /* text-align: center; */
+}
+
+#inputContainer .hasAccountText a {
+  color: rgb(98, 241, 141);
+  text-decoration: none;
+}
+
+#inputContainer .hasAccountText a:hover {
+  text-decoration: underline;
+}
+
+#registerForm,
+#loginForm {
+  transition: visibility 3s linear;
+}
+
+#registerForm {
+  display: none;
+}
+
+#loginContainer .errorMessage {
+  font-size: .8rem;
+  color: rgb(255, 77, 77);
+  display: block;
+  margin-bottom: 10px;
+}
+
+/** =========================================
+ *  my personal styles
+ * =========================================*/
+
+#loginText {
+  width: 52%;
+  padding: 45px;
+  float: left;
+}
+
+#loginText h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: rgb(98, 241, 141);
+  line-height: 2rem;
+}
+
+#loginText li {
+  font-size: .8rem;
+  list-style-type: none;
+  padding: 10px 7px;
+}
+
+#loginText li {
+  background-image: url("../images/tick.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 5%;
+  padding-left: 45px;
+}
+
+.checked {
+  background-image: url("../images/checked.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 3.5%;
+  padding-left: 20px;
+}

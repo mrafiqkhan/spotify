@@ -1,0 +1,37 @@
+/* :root {
+
+} */
+
+* {
+  box-sizing: border-box;
+  /* margin: 0; */
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  background: #181818;
+}
+
+.clear::after,
+.clear::before {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+body {
+  font-family: 'Nunito', roboto, 'open sans', sans-serif, Helvetica, arial;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 1.3rem;
+  word-spacing: .03rem;
+  letter-spacing: .04rem;
+  color: #ccc;
+}
+
+p {
+  font-family: roboto, sans-serif;
+}
