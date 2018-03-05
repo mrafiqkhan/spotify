@@ -3,7 +3,7 @@
         <div id="nowPlayingLeft">
           <div class="content">
             <span class="albumLink">
-              <img src="assets/images/albums/alb6.jpg" alt="" class="albumArtwork">
+              <img src="assets/images/artwork/goinghigher.jpg" alt="" class="albumArtwork">
             </span>
             <div class="trackInfo">
               <span class="trackName">Castle On The Hill</span>
