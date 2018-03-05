@@ -14,8 +14,8 @@
             <img src="<?php echo $row['artworkPath'] ?>" alt="">
           </div>
           <div class="albumFooter">
-            <p><?php echo $row['title']; ?></>
-            <p><?php echo $row['artist']; ?></p>
+            <p class='albumTitle'><?php echo $row['title']; ?></>
+            <p class='albumArtist'><?php echo $row['artist']; ?></p>
           </div>
         </div>
 
