@@ -5,6 +5,7 @@ class Album{
 
   private $id;
   private $con;
+  private $name;
 
   private $title;
 public function __construct($con, $id){
