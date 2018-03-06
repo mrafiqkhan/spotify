@@ -1,0 +1,51 @@
+#gridViewContainer .album {
+  /* position: relative; */
+  margin: .5rem .8rem 1rem 0;
+  /* flex-grow: 1; */
+  width: 160px;
+  height: 200px;
+  /* border: 2px solid #999; */
+  border-radius: 2px;
+  box-shadow: 0px 0px 1px rgb(75, 75, 75);
+}
+
+#gridViewContainer a {
+  text-decoration: none;
+  color: #aaa;
+}
+
+#gridViewContainer .album:hover {
+  box-shadow: 0px .6px 1px rgb(75, 75, 75);
+}
+
+#gridViewContainer .album .albumHeader {
+  /* border: 1px solid red; */
+  height: 155px;
+}
+
+#gridViewContainer .album .albumFooter {
+  padding: 2px 10px 0;
+}
+
+#gridViewContainer .album .albumFooter p {
+  margin: 0;
+  font-size: .7rem;
+}
+
+#gridViewContainer .album .albumFooter p.albumTitle {
+  white-space: nowrap;
+}
+
+#gridViewContainer .album .albumFooter p.albumArtist {
+  color: rgb(114, 113, 113);
+  font-style: italic;
+  font-family: 'open sans', sans-serif, helvetica;
+  font-weight: 500;
+}
+
+#gridViewContainer .album .albumHeader img {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}

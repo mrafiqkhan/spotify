@@ -1,0 +1,24 @@
+#gridViewContainer .album {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+  width: 100%;
+  padding: 3% 10%;
+  /* border: 2px solid #fff; */
+}
+
+#gridViewContainer .albumHeader {
+  width: 220px;
+  height: 220px;
+}
+
+#gridViewContainer .albumFooter {
+  margin-left: 20px;
+  font-size: 1rem;
+}
+
+#gridViewContainer .album img {
+  width: 100%;
+  height: 100%;
+}
