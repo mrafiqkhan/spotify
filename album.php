@@ -6,9 +6,8 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 
         $albumInfo = mysqli_fetch_assoc($albumQuery);
         if($albumInfo){
+          $artist = new Artist($con, $albumInfo['artist']);
 
-          $artistName= mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM artists where id={$albumInfo['artist']}"));
-          $artistName =$artistName['name'];
         }
 }
 
@@ -19,7 +18,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
  <link rel="stylesheet" href="assets/css/album.css">
 <?php include("includes/header.php");
 if(!empty($albumInfo)){ ?>
-<h1 id="pageHeadingBig"><?php echo $artistName;?></h1>
+<h1 id="pageHeadingBig"><?php echo $artist->getArtistName();?></h1>
     <div id="gridViewContainer">
 
         <div class="album">
