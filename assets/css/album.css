@@ -15,7 +15,16 @@
 
 #gridViewContainer .albumFooter {
   margin-left: 20px;
-  font-size: 1rem;
+  font-size: .9rem;
+}
+
+#gridViewContainer .albumFooter p {
+  margin: 2px;
+  color: #777;
+}
+
+#gridViewContainer .albumFooter p.albumTitle {
+  font-style: italic;
 }
 
 #gridViewContainer .album img {

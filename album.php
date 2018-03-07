@@ -1,39 +1,62 @@
 <?php include("includes/topHeader.php");
  $albumId = $_GET['id'];
-if(isset($_GET['id']) && !empty($_GET['id'])){
+// if(isset($_GET['id']) && !empty($_GET['id'])){
 
-  $albumQuery = mysqli_query($con, "SELECT * FROM albums WHERE id = {$albumId}");
+        // if($albumInfo){
+          $albumInfo = new Album($con, $_GET['id']);
 
-        $albumInfo = mysqli_fetch_assoc($albumQuery);
-        if($albumInfo){
-          $artist = new Artist($con, $albumInfo['artist']);
+          // $artist = new Artist($con, 1);
 
-        }
+        // }
+// }
+
+
+function getSongs(){
+  global $con;
+  global $albumInfo;
+
+$row = mysqli_query($con, "SELECT * FROM songs WHERE album = {$albumInfo->getAlbumId()}");
+
+return $row;
 }
-
-
-
 
 ?>
  <link rel="stylesheet" href="assets/css/album.css">
 <?php include("includes/header.php");
+
+
+
 if(!empty($albumInfo)){ ?>
-<h1 id="pageHeadingBig"><?php echo $artist->getArtistName();?></h1>
+
     <div id="gridViewContainer">
 
         <div class="album">
 
           <div class="albumHeader">
-            <img src="<?php echo $albumInfo['artworkPath'] ?>" alt="">
+            <img src="<?php echo $albumInfo->getArtworkPath(); ?>" alt="">
           </div>
           <div class="albumFooter">
-            <p class='albumTitle'><?php echo $albumInfo['title']; ?></>
+            <h1 id="pageHeadingBig"><?php echo $albumInfo->getAlbumTitle();?></h1>
+            <p class='albumTitle'>By <?php echo $albumInfo->getArtist(); ?></p>
+            <p class='numberOfSongs'><?php echo $albumInfo->getNumberOfSongs(); ?> songs</p>
 
           </div>
 
         </div>
 
+        <div class="songList">
+          <?php
+
+          $res = getSongs();
+            while($song = mysqli_fetch_assoc($res)){
+                ?>
+
+              <p><?php echo $song['title']; ?> <audio> <source src="<?php echo $song['path'];?>" type="audio/mpeg"></audio></p>
+
+          <?php } ?>
+        </div>
+
       </div>
 <?php }else{echo "<div class='errorDiv'>No album found </div>";} ?>
-
+<script src="assets/js/song.js"></script>
 <?php include("includes/footer.php"); ?>
