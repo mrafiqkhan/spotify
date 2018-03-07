@@ -225,13 +225,18 @@ p {
   height: 4px;
   vertical-align: middle;
   border-radius: 2px;
+  position: relative;
 }
 
 .progress {
   background-color: #a0a0a0;
   height: 4px;
-  width: 50%;
+  width: 1%;
+  position: absolute;
+  /* top: -.6px; */
   border-radius: 2px;
+  /* height: 5px; */
+  /* border-radius: 2px; */
 }
 
 #nowPlayingLeft .content {
@@ -292,5 +297,5 @@ p {
 }
 
 #nowPlayingRight .progress {
-  width: 80%;
+  width: 50%;
 }

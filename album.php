@@ -51,12 +51,14 @@ if(!empty($albumInfo)){ ?>
             while($song = mysqli_fetch_assoc($res)){
                 ?>
 
-              <p><?php echo $song['title']; ?> <audio> <source src="<?php echo $song['path'];?>" type="audio/mpeg"></audio></p>
+              <p><?php echo $song['title']; ?><span class="hidden"><?php echo $song['path']; ?></span></p>
 
           <?php } ?>
         </div>
 
       </div>
 <?php }else{echo "<div class='errorDiv'>No album found </div>";} ?>
+
+<?php include("includes/footerTop.php"); ?>
 <script src="assets/js/song.js"></script>
 <?php include("includes/footer.php"); ?>
