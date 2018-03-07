@@ -65,3 +65,5 @@ gulpfile.js
 scss/
 
 package-lock.json
+
+.jshintrc
