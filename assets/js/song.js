@@ -5,20 +5,24 @@
 // = new Audio(audioSrc); getAudio.addEventListener("loadeddata", function () {
 // console.log(this.duration); });
 const albumListPlayIcon = document.querySelectorAll(".albumListPlayIcon");
+nowPlayingBarProgress.addEventListener("click", function () {
+  if (!getCurrentPlayingSong().paused) {
+    getCurrentPlayingSong().pause();
+  } else {
+    getCurrentPlayingSong().play();
+  }
+
+});
 
 function playThisSong(index) {
   if (nowPlaying !== '') {
-    playList[nowPlaying].pause();
+    getCurrentPlayingSong().pause();
   }
   nowPlaying = index;
 
-  playList[nowPlaying]
-    .firstChild
-    .nextElementSibling
-    .nextElementSibling
-    .play();
-  let minutes = Math.floor(playList[nowPlaying].firstChild.nextElementSibling.nextElementSibling.duration / 60);
-  let seconds = Math.floor(playList[nowPlaying].firstChild.nextElementSibling.nextElementSibling.duration - minutes * 60);
+  getCurrentPlayingSong().play();
+  let minutes = Math.floor(getCurrentPlayingSong().duration / 60);
+  let seconds = Math.floor(getCurrentPlayingSong().duration - minutes * 60);
 
   nowPlayingBarCurrentTime.firstChild.innerText = minutes;
   nowPlayingBarCurrentTime.lastChild.innerText = seconds;
@@ -39,26 +43,18 @@ albumListPlayIcon
   });
 
 nowPlayingBarPause.addEventListener('click', function () {
-  playList[nowPlaying]
-    .firstChild
-    .nextElementSibling
-    .nextElementSibling
-    .pause();
+  getCurrentPlayingSong().pause();
   nowPlayingBarPause.style.display = 'none';
   nowPlayingBarPlay.style.display = 'inline-block';
 });
 nowPlayingBarPlay.addEventListener('click', function () {
-  playList[nowPlaying]
-    .firstChild
-    .nextElementSibling
-    .nextElementSibling
-    .play();
+  getCurrentPlayingSong().play();
   nowPlayingBarPlay.style.display = 'none';
   nowPlayingBarPause.style.display = 'inline-block';
 });
 
 function songProgressBar() {
-  let duration = playList[nowPlaying].firstChild.nextElementSibling.nextElementSibling.duration;
+  let duration = getCurrentPlayingSong().duration;
   nowPlayingBarProgress.setAttribute('max', Math.floor(duration));
   nowPlayingBarProgress.style.width = (100 + "%");
   currentInterval = setInterval(getCurrentTime, 1000);
@@ -66,13 +62,14 @@ function songProgressBar() {
 }
 
 function getCurrentTime() {
-  console.log("hello");
-  let currentTimeOfSong = playList[nowPlaying].firstChild.nextElementSibling.nextElementSibling.currentTime;
-  nowPlayingBarProgress.setAttribute("value", Math.floor(currentTimeOfSong));
-  let minutes = Math.floor(playList[nowPlaying].firstChild.nextElementSibling.nextElementSibling.duration / 60); let seconds = Math.floor(playList[nowPlaying].firstChild.nextElementSibling.nextElementSibling.duration - minutes * 60);
-  let dur = playList[nowPlaying].firstChild.nextElementSibling.nextElementSibling.duration;
 
-  let crt = Math.floor(playList[nowPlaying].firstChild.nextElementSibling.nextElementSibling.currentTime);
+  let currentTimeOfSong = getCurrentPlayingSong().currentTime;
+  nowPlayingBarProgress.setAttribute("value", Math.floor(currentTimeOfSong));
+  let minutes = Math.floor(getCurrentPlayingSong().duration / 60);
+  let seconds = Math.floor(getCurrentPlayingSong().duration - minutes * 60);
+  let dur = getCurrentPlayingSong().duration;
+
+  let crt = Math.floor(getCurrentPlayingSong().currentTime);
   if (crt < 10) {
 
     nowPlayingBarRemaining.lastChild.innerHTML = "0" + crt;
@@ -94,4 +91,8 @@ function settingNowPlayingBarInfo() {
   nowPlayingBarArtistName.innerText = playList[nowPlaying]
     .querySelector(".artistName")
     .innerText;
+}
+
+function getCurrentPlayingSong() {
+  return playList[nowPlaying].firstChild.nextElementSibling.nextElementSibling;
 }
