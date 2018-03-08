@@ -35,3 +35,16 @@
 .hidden {
   display: none;
 }
+
+.albumListPlayIcon img {
+  width: 15%;
+  height: 15%;
+  vertical-align: middle;
+  margin-right: 25px;
+}
+
+#gridViewContainer .artistName {
+  font-style: italic;
+  color: #777;
+  font-size: .8rem;
+}

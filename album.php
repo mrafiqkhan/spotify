@@ -51,7 +51,8 @@ if(!empty($albumInfo)){ ?>
             while($song = mysqli_fetch_assoc($res)){
                 ?>
 
-              <p><?php echo $song['title']; ?><span class="hidden"><?php echo $song['path']; ?></span></p>
+              <p class="albumListPlayIcon" data-albumInfo="<?php echo $albumInfo->getArtworkPath(); ?>"><img src='assets/images/icons/play.png' ><span class='songTitle'><?php echo $song['title']; ?></span><audio class="hidden" data-songid="<?php echo $song['id'];?>"><source src="<?php echo $song['path'];?>"></source></audio><span class="artistName"> by <?php echo $albumInfo->getArtist();
+?></span></p>
 
           <?php } ?>
         </div>

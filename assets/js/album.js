@@ -1,0 +1,1 @@
+// const albumHeaderImg = document.querySelector(".albumHeader img");
