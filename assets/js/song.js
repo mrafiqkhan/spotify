@@ -5,6 +5,22 @@
 // = new Audio(audioSrc); getAudio.addEventListener("loadeddata", function () {
 // console.log(this.duration); });
 const albumListPlayIcon = document.querySelectorAll(".albumListPlayIcon");
+
+function nowPlayingBarDisplay() {
+  if (nowPlaying === "") {
+    nowPlayingBar.style.bottom = "-90px";
+    if (nowPlayingBar.style.bottom === "-90px") {
+      navBarContainer.style.height = "100vh";
+    }
+  }
+  if (nowPlaying !== "") {
+    nowPlayingBar.style.bottom = "0";
+    navBarContainer.style.height = "calc(100vh - 90px)";
+  }
+
+}
+nowPlayingBarDisplay();
+
 nowPlayingBarProgress.addEventListener("click", function () {
   if (!getCurrentPlayingSong().paused) {
     getCurrentPlayingSong().pause();
@@ -19,6 +35,7 @@ function playThisSong(index) {
     getCurrentPlayingSong().pause();
   }
   nowPlaying = index;
+  nowPlayingBarDisplay();
 
   getCurrentPlayingSong().play();
   let minutes = Math.floor(getCurrentPlayingSong().duration / 60);
@@ -72,21 +89,11 @@ function getCurrentTime() {
   let m = Math.floor(currentTimeOfSong / 60);
   let s = Math.floor(currentTimeOfSong % 60);
 
-  nowPlayingBarRemaining.lastChild.innerHTML = (s < 10 ? "0" + s : s);
+  nowPlayingBarRemaining.lastChild.innerHTML = (s < 10
+    ? "0" + s
+    : s);
   nowPlayingBarRemaining.firstChild.innerHTML = m;
-  /*
-  let crt = Math.floor(getCurrentPlayingSong().currentTime);
-  if (crt < 10) {
 
-    nowPlayingBarRemaining.lastChild.innerHTML = "0" + crt;
-  } else if (crt >= 10 && crt < 60) {
-    nowPlayingBarRemaining.lastChild.innerHTML = crt;
-
-  } else if (crt >= 60 && crt < 120) {
-    nowPlayingBarRemaining.lastChild.innerHTML = crt - 60;
-    nowPlayingBarRemaining.firstChild.innerHTML += 1;
-  }*/
-  // nowPlayingBarProgress.style.width = (Math.floor(currentTimeOfSong) + "%");
 }
 function settingNowPlayingBarInfo() {
 

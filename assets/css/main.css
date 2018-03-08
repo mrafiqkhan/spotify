@@ -60,7 +60,9 @@ p {
 #navBarContainer {
   background-color: #111;
   width: 17%;
-  height: 100vh;
+  height: -webkit-calc(100vh - 90px);
+  height: -moz-calc(100vh - 90px);
+  height: calc(100vh - 90px);
   position: fixed;
   box-shadow: 2px 0 5px rgb(28, 27, 27);
   left: 0;
@@ -142,6 +144,7 @@ p {
   background-color: #282828;
   position: fixed;
   bottom: 0;
+  transition: bottom .5s;
 }
 
 #nowPlayingBar {

@@ -43,6 +43,7 @@
           </div>
           <span class="progressTime remaining"><span>0</span>:<span>00</span></span>
         </div>
+
         </div>
       </div>
       <div id="nowPlayingRight">
@@ -62,3 +63,4 @@
       </div>
       </div>
     </div>
+  

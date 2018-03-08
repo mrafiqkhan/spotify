@@ -3,6 +3,8 @@ let currentInterval = '';
 const nowPlayingBarProgress = document.querySelector("#mainProgressBar");
 nowPlayingBarProgress.setAttribute("value", 0);
 nowPlayingBarProgress.style.width = "0%";
+const nowPlayingBar = document.querySelector("#nowPlayingBarContainer");
+const navBarContainer = document.querySelector("#navBarContainer");
 const nowPlayingBarCurrentTime = document.querySelector(".current");
 const nowPlayingBarRemaining = document.querySelector(".remaining");
 const nowPlayingBarPlay = document.querySelector(".play");
