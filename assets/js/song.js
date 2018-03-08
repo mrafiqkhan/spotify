@@ -69,6 +69,12 @@ function getCurrentTime() {
   let seconds = Math.floor(getCurrentPlayingSong().duration - minutes * 60);
   let dur = getCurrentPlayingSong().duration;
 
+  let m = Math.floor(currentTimeOfSong / 60);
+  let s = Math.floor(currentTimeOfSong % 60);
+
+  nowPlayingBarRemaining.lastChild.innerHTML = (s < 10 ? "0" + s : s);
+  nowPlayingBarRemaining.firstChild.innerHTML = m;
+  /*
   let crt = Math.floor(getCurrentPlayingSong().currentTime);
   if (crt < 10) {
 
@@ -79,7 +85,7 @@ function getCurrentTime() {
   } else if (crt >= 60 && crt < 120) {
     nowPlayingBarRemaining.lastChild.innerHTML = crt - 60;
     nowPlayingBarRemaining.firstChild.innerHTML += 1;
-  }
+  }*/
   // nowPlayingBarProgress.style.width = (Math.floor(currentTimeOfSong) + "%");
 }
 function settingNowPlayingBarInfo() {
