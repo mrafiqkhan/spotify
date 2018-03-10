@@ -294,3 +294,23 @@ p {
 #nowPlayingRight .progress {
   width: 80%;
 }
+
+@media only screen and (max-width: 800px) {
+  #topContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  #navBarContainer,
+  #mainViewContent {
+    width: 100%;
+    margin: 0;
+    height: initial;
+    position: initial;
+    padding: 0;
+  }
+  #navBarContainer * {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+}
