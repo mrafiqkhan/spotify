@@ -306,11 +306,59 @@ p {
     margin: 0;
     height: initial;
     position: initial;
-    padding: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
-  #navBarContainer * {
+  #navBarContainer {
     text-align: center;
     margin: 0;
     padding: 0;
   }
+  nav.navBar,
+  nav.navBar h1,
+  #topContainer nav.navBar .group a {
+    text-align: center;
+    width: 100%;
+  }
+  nav.navBar .navigation::before {
+    content: "_";
+    display: block;
+  }
+  nav.navBar .navigation {
+    height: 10px;
+    overflow: hidden;
+  }
+  nav.navBar h1 {
+    padding-bottom: 20px;
+  }
+  /*=============Main Content======*/
+  #gridViewContainer {
+    justify-content: center;
+  }
+  /*==============NowPlayingBar*/
+  #nowPlayingBar {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    text-align: center;
+    justify-content: center;
+  }
+  #nowPlayingBar #nowPlayingLeft,
+  #nowPlayingBar #nowPlayingCenter,
+  #nowPlayingBar #nowPlayingRight {
+    width: 100%;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  #nowPlayingBar #nowPlayingLeft .content {
+    height: auto;
+  }
+  #nowPlayingBar #nowPlayingLeft .content img {
+    float: none;
+  }
+  #nowPlayingBar #nowPlayingRight .volumeBar {
+    justify-content: center;
+  }
 }
+
+@media only Screen and (max-width: 565px) {}

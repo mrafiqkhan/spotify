@@ -8,7 +8,7 @@
               <a href="search.php" class="navItemLink">Search</a>
             </div>
           </div>
-          <div class="group">
+          <div class="group navigation">
             <div class="navItem">
               <a href="" class="navItemLink">Brows Library</a>
             </div>
