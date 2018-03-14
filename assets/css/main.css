@@ -52,9 +52,10 @@ p {
 #topContainer {
   min-height: 100%;
   width: 100%;
-  overflow: auto;
+  +overflow: auto;
   display: flex;
   flex-direction: row;
+  min-height: calc(100vh-90px);
 }
 
 #navBarContainer {
@@ -112,8 +113,8 @@ p {
   overflow: hidden;
   width: 83%;
   margin-left: 17.1%;
+  padding-bottom: 90px;
   /* border: 2px solid blue; */
-  /* min-height: calc(100vh-90px); */
 }
 
 #mainContent {
@@ -320,14 +321,18 @@ p {
     text-align: center;
     width: 100%;
   }
-  nav.navBar .navigation::before {
+  /* nav.navBar .navigation::before {
     content: "_";
     display: block;
   }
-  nav.navBar .navigation {
-    height: 10px;
-    overflow: hidden;
+  nav.navBar .navigation:before::hover .navBar {
+    height: auto;
   }
+  nav.navBar .navigation {
+    height: 25px;
+    border: 1px solid blue;
+    overflow: hidden;
+  } */
   nav.navBar h1 {
     padding-bottom: 20px;
   }

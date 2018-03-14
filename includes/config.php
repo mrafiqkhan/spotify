@@ -15,4 +15,5 @@ if (mysqli_connect_errno()) {
 include("classes/Constants.php");
 include("classes/Account.php");
 include("classes/Artist.php");
+include("classes/Song.php");
 include("classes/Album.php");
