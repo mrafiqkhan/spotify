@@ -49,6 +49,8 @@
 }
 
 .trackList li:hover {
+  transition: background-color .3s linear;
+  box-shadow: 0 .4px .3px #323232;
   background: #212020;
   background-image: url("../images/icons/play-white.png");
   background-repeat: no-repeat;

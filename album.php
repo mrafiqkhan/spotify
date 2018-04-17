@@ -7,9 +7,6 @@ $album = new Album($con, $_GET['id']);
   header("location:index.php");
 }
 
-
-
-
 ?>
  <link rel="stylesheet" href="assets/css/album.css">
 <?php include("includes/header.php");?>

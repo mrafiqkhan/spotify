@@ -43,6 +43,10 @@ public function getAlbum()
   return $albumTitle->getTitle();
 
 }
+public function getAlbumImage(){
+  $albumImg = new Album($this->con, $this->albumId);
+  return $albumImg->getArtworkPath();
+}
 
 public function getDuration(){
   return $this->duration;
