@@ -3,7 +3,9 @@
 <script>
   $(document)
   .ready(function () {
-    currentPlaylist = <?php echo $jsonArray; ?>;
+    currentPlaylist = ["0"];
+
+    <?php //echo $jsonArray; ?>;
     audioElement = new Audio();
     setTrack(currentPlaylist[0], currentPlaylist, false);
 
