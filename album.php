@@ -6,7 +6,6 @@ $album = new Album($con, $_GET['id']);
 }else {
   header("location:index.php");
 }
-
 ?>
  <link rel="stylesheet" href="assets/css/album.css">
 <?php include("includes/header.php");?>
@@ -46,4 +45,4 @@ $album = new Album($con, $_GET['id']);
 
 
 <?php  include "includes/footerTop.php";  ?>
-<?php include("includes/footer.php"); ?>
+<?php include "includes/footer.php"; ?>
