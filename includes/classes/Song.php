@@ -47,7 +47,9 @@ public function getAlbumImage(){
   $albumImg = new Album($this->con, $this->albumId);
   return $albumImg->getArtworkPath();
 }
-
+public function getPath(){
+  return $this->path;
+}
 public function getDuration(){
   return $this->duration;
 }

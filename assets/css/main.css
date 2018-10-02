@@ -52,7 +52,7 @@ p {
 #topContainer {
   min-height: 100%;
   width: 100%;
-  +overflow: auto;
+  overflow: auto;
   display: flex;
   flex-direction: row;
   min-height: calc(100vh-90px);
@@ -368,6 +368,10 @@ p {
 
 #audioEle {
   visibility: hidden;
+}
+
+#nowPlayingRight .progress {
+  width: 50%;
 }
 
 @media only Screen and (max-width: 565px) {}

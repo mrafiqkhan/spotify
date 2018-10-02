@@ -7,7 +7,11 @@
 
 // currentPlaylist = new Array(<?php echo  $jsonArray; ?>);
 
-const nowPlayingBarContainer = document.querySelector("#nowPlayingBarContainer");
-const nowPlayingBarTrack = document.querySelector("#nowPlayingBarContainer .trackName");
-const nowPlayingBarArtist = document.querySelector("#nowPlayingBarContainer .artistName");
-const progressBar = document.querySelector("#nowPlayingBarContainer .progress");
+// const nowPlayingBarContainer = document.querySelector("#nowPlayingBarContainer");
+const mainProgressBar = document.querySelector("#mainProgressBar");
+const remaining = document.querySelector(".playbackBar .remaining");
+const current = document.querySelector(".playbackBar .current");
+const trackName = document.querySelector(".trackInfo .trackName");
+const artistName = document.querySelector(".trackInfo .artistName");
+const albumThumbnail = document.querySelector(".albumLink img");
+
