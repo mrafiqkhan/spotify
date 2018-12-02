@@ -217,7 +217,7 @@ p {
   height: 12px;
   display: inline-flex;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 8.5px;
 }
 
 .progressBarBg {
@@ -226,14 +226,44 @@ p {
   height: 4px;
   vertical-align: middle;
   border-radius: 2px;
+  position: relative;
 }
 
-.progress {
+progress[value] {
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  width: inherit;
+  height: inherit;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #404040;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-webkit-progress-value {
+  background-image: -webkit-linear-gradient(-45deg,
+    transparent 33%, rgba(0, 0, 0, .1) 33%,
+    rgba(0, 0, 0, .1) 66%, transparent 66%),
+    -webkit-linear-gradient(top,
+    rgba(255, 255, 255, .25),
+    rgba(0, 0, 0, .25)),
+    -webkit-linear-gradient(left, #09c, #f44);
+
+  border-radius: 2px;
+  background-size: 35px 20px,
+    100% 100%,
+    100% 100%;
+}
+
+/* .progress {
   background-color: #a0a0a0;
   height: 4px;
   width: 0%;
   border-radius: 2px;
-}
+} */
 
 #nowPlayingLeft .content {
   height: 57px;
@@ -293,7 +323,21 @@ p {
 }
 
 #nowPlayingRight .progress {
-  width: 80%;
+  width: inherit;
+  height: inherit;
+  background-image: -webkit-linear-gradient(-45deg,
+    transparent 33%, rgba(0, 0, 0, .1) 33%,
+    rgba(0, 0, 0, .1) 66%, transparent 66%),
+    -webkit-linear-gradient(top,
+    rgba(255, 255, 255, .25),
+    rgba(0, 0, 0, .25)),
+    -webkit-linear-gradient(left, #09c, #f44);
+
+  border-radius: 2px;
+  background-size: 35px 20px,
+    100% 100%,
+    100% 100%;
+
 }
 
 @media only screen and (max-width: 800px) {
@@ -301,6 +345,7 @@ p {
     display: flex;
     flex-direction: column;
   }
+
   #navBarContainer,
   #mainViewContent {
     width: 100%;
@@ -310,17 +355,20 @@ p {
     padding-top: 20px;
     padding-bottom: 20px;
   }
+
   #navBarContainer {
     text-align: center;
     margin: 0;
     padding: 0;
   }
+
   nav.navBar,
   nav.navBar h1,
   #topContainer nav.navBar .group a {
     text-align: center;
     width: 100%;
   }
+
   /* nav.navBar .navigation::before {
     content: "_";
     display: block;
@@ -336,10 +384,12 @@ p {
   nav.navBar h1 {
     padding-bottom: 20px;
   }
+
   /*=============Main Content======*/
   #gridViewContainer {
     justify-content: center;
   }
+
   /*==============NowPlayingBar*/
   #nowPlayingBar {
     display: flex;
@@ -348,6 +398,7 @@ p {
     text-align: center;
     justify-content: center;
   }
+
   #nowPlayingBar #nowPlayingLeft,
   #nowPlayingBar #nowPlayingCenter,
   #nowPlayingBar #nowPlayingRight {
@@ -355,12 +406,15 @@ p {
     padding-top: 7px;
     padding-bottom: 7px;
   }
+
   #nowPlayingBar #nowPlayingLeft .content {
     height: auto;
   }
+
   #nowPlayingBar #nowPlayingLeft .content img {
     float: none;
   }
+
   #nowPlayingBar #nowPlayingRight .volumeBar {
     justify-content: center;
   }
@@ -368,10 +422,6 @@ p {
 
 #audioEle {
   visibility: hidden;
-}
-
-#nowPlayingRight .progress {
-  width: 50%;
 }
 
 @media only Screen and (max-width: 565px) {}

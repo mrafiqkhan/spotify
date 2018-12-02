@@ -15,3 +15,4 @@ const trackName = document.querySelector(".trackInfo .trackName");
 const artistName = document.querySelector(".trackInfo .artistName");
 const albumThumbnail = document.querySelector(".albumLink img");
 
+const volume = document.querySelector(".volumeBar .progress");
