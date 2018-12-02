@@ -8,6 +8,9 @@ $(document)
   .ready(function () {
     currentPlaylist = <?php echo $jsonArray; ?>;
     setTrack(currentPlaylist[0], currentPlaylist, false);
+    audioElement.audio.volume = 0.5;
+    volume.setAttribute("max", volume.parentElement.offsetWidth);
+
 
   });
 </script>

@@ -72,7 +72,7 @@
             </button>
             <div class="progressBar">
             <div class="progressBarBg">
-              <progress class="progress" value="0.5" max="1"></progress>
+              <progress class="progress" value="50" max="100"></progress>
             </div>
           </div>
         </div>

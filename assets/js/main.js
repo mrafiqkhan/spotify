@@ -16,3 +16,8 @@ const artistName = document.querySelector(".trackInfo .artistName");
 const albumThumbnail = document.querySelector(".albumLink img");
 
 const volume = document.querySelector(".volumeBar .progress");
+const volumeBtn = document.querySelector("#nowPlayingRight .volume");
+const muteBtn = document.querySelector("#nowPlayingRight .mute");
+let playingSongStatus;
+let currentTimeInterval;
+let remainingTimeInterval;
