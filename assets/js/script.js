@@ -4,34 +4,49 @@ const pauseButton = document.querySelector(".pause");
 function Audio() {
   this.currentlyPlaying = '';
   this.isPlaying = false;
+  this.isMuted = false;
   this.audio = document.createElement("audio");
 
-  this.setTrack = function (src) {
-      this.audio.src = src;
+  this.setTrack = function (track) {
+    this.currentlyPlaying = track;
+    this.audio.src = "assets/music/" + track.path;
 
-    },
-    this.play = function () {
-      this
-        .audio
-        .play();
-      this.isPlaying = true;
-      playButton.style.display = "none";
-      pauseButton.style.display = "inline-block";
-    },
-    this.pause = function () {
-      this
-        .audio
-        .pause();
-      this.isPlaying = false;
-      pauseButton.style.display = "none";
-      playButton.style.display = "inline-block";
-    }
+  };
+  this.play = function () {
+    this
+      .audio
+      .play();
+    this.isPlaying = true;
+    playButton.style.display = "none";
+    pauseButton.style.display = "inline-block";
+  };
+  this.pause = function () {
+    this
+      .audio
+      .pause();
+    this.isPlaying = false;
+    pauseButton.style.display = "none";
+    playButton.style.display = "inline-block";
+  };
+  this.muteSong = function () {
+    this.isMuted = true;
+    audioElement.audio.muted = true;
+    muteBtn.style.display = "block";
+    volumeBtn.style.display = "none";
+  };
+  this.unmuteSong = function () {
+    this.isMuted = false;
+    audioElement.audio.muted = false;
+    muteBtn.style.display = "none";
+    volumeBtn.style.display = "block";
+  }
 }
 
 function setTrack(trackId, newPlaylist, play) {
 
   $.post("includes/handlers/ajax/getSongJson.php", {
-    songId: trackId
+    songId: trackId,
+    calledFor: "setTrack"
   }, function (data) {
     const track = JSON.parse(data);
     //  console.log(data);
@@ -39,15 +54,22 @@ function setTrack(trackId, newPlaylist, play) {
     trackName.innerText = track.title;
     artistName.innerText = track.artist;
     albumThumbnail.src = track.albumImg;
-    audioElement.setTrack("assets/music/" + track.path);
+    audioElement.setTrack(track);
     songProgressBar();
-    playSong();
+    playSong(track.id);
     playingSongStatus = setInterval(checkSongStatus, 1000);
   });
 
 }
 
-function playSong() {
+function playSong(id) {
+  if (audioElement.audio.currentTime === 0) {
+
+    $.post("includes/handlers/ajax/getSongJson.php", {
+      songId: id,
+      calledFor: "updatePlayCount"
+    });
+  }
   audioElement.play();
 }
 
@@ -62,38 +84,34 @@ function checkSongStatus() {
     audioElement.audio.currentTime = 0;
     mainProgressBar.value = 0;
     clearInterval(playingSongStatus);
-    // clearInterval(currentTimeInterval);
-    // clearInterval(remainingTimeInterval);
-    document.querySelector(".current .m").innerHTML = "0";
-    document.querySelector(".current .s").innerHTML = "00";
+    document.querySelector(".current .m").innerText = "0";
+    document.querySelector(".current .s").innerText = "00";
+    document.querySelector(".remaining .m").innerText = "0";
+    document.querySelector(".remaining .s").innerText = "00";
+
   }
 }
 
 function songProgressBar() {
-  let duration = audioElement.duration;
+  const duration = audioElement.duration;
   mainProgressBar.setAttribute('max', Math.floor(duration));
   mainProgressBar.style.width = (100 + "%");
   currentTimeInterval = setInterval(getCurrentTime, 1000);
   remainingTimeInterval = setInterval(getRemainingTime, 1000);
 
 }
-
+/* Track current played time of the song and update the progress bar according */
 function getCurrentTime() {
-
   const currentTimeOfSong = audioElement.audio.currentTime;
-  mainProgressBar.setAttribute("max", Math.floor(audioElement.audio.duration));
+  const dur = audioElement.audio.duration;
+  const m = Math.floor(currentTimeOfSong / 60);
+  const s = Math.floor(currentTimeOfSong % 60);
+  mainProgressBar.setAttribute("max", Math.floor(dur));
   mainProgressBar.setAttribute("value", Math.floor(currentTimeOfSong));
-  let minutes = Math.floor(audioElement.audio.duration / 60);
-  let seconds = Math.floor(audioElement.audio.duration - minutes * 60);
-  let dur = audioElement.audio.duration;
-
-  let m = Math.floor(currentTimeOfSong / 60);
-  let s = Math.floor(currentTimeOfSong % 60);
-  currentTimeMin = document.querySelector(".current .m");
-  currentTimeSec = document.querySelector(".current .s");
-  currentTimeSec.innerHTML = (s < 10 ? "0" + s : s);
-  currentTimeMin.innerHTML = m;
-
+  const currentTimeMin = document.querySelector(".current .m");
+  const currentTimeSec = document.querySelector(".current .s");
+  currentTimeSec.innerText = (s < 10 ? "0" + s : s);
+  currentTimeMin.innerText = m;
 }
 
 function forwardSong(e) {
@@ -105,14 +123,24 @@ function forwardSong(e) {
 
 function getRemainingTime() {
   const currentTimeOfSong = audioElement.audio.currentTime;
-
+  const duration = audioElement.audio.duration;
+  const timeRemains = duration - currentTimeOfSong;
+  const m = Math.floor(timeRemains / 60);
+  const s = Math.floor(timeRemains % 60);
+  const remainingTimeMin = document.querySelector(".remaining .m");
+  const remainingTimeSec = document.querySelector(".remaining .s");
+  remainingTimeSec.innerText = (s < 10 ? "0" + s : s);
+  remainingTimeMin.innerText = m
 }
 
 function setVolume(e) {
   e = e || window.event;
   const setVolumeSize = e.offsetX;
-  // console.log(setVolumeSize);
-  audioElement.audio.volume = Math.round((setVolumeSize / 147) * 100) / 100;
+  if (audioElement.isMuted) {
+    audioElement.unmuteSong();
+  }
+  const setVolume = Math.round((setVolumeSize / 147) * 100) / 100;
+  audioElement.audio.volume = setVolume > 1 ? 1 : setVolume;
 
   const currentVolume = setVolumeSize;
   const volumeWidth = volume.offsetWidth;
@@ -121,15 +149,11 @@ function setVolume(e) {
 }
 
 function muteSong() {
-  audioElement.audio.muted = true;
-  muteBtn.style.display = "block";
-  volumeBtn.style.display = "none";
+  audioElement.muteSong();
 }
 
 function unmuteSong() {
-  audioElement.audio.muted = false;
-  muteBtn.style.display = "none";
-  volumeBtn.style.display = "block";
+  audioElement.unmuteSong();
 }
 /* ============================================================================================ */
 /* ============================================================================================ */
@@ -139,11 +163,11 @@ audioElement = new Audio();
 audioElement.muted = "muted";
 playButton.addEventListener("click", playSong);
 window.addEventListener("keyup", (e) => {
-  if (e.charCode === 0) {
+  if (e.keyCode === 32) {
     if (audioElement.isPlaying) {
-      audioElement.pause();
+      pauseSong();
     } else {
-      audioElement.play();
+      playSong();
     }
   }
 });

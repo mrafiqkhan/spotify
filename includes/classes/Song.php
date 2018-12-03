@@ -53,9 +53,17 @@ public function getPath(){
 public function getDuration(){
   return $this->duration;
 }
+public function getSongId(){
+  return $this->id;
+}
 
+public static function updatePlayCount($con, $id){
 
+  if(mysqli_query($con, "UPDATE songs SET plays = plays + 1  WHERE id = ".$id)){
 
+    return true;
+  }
+}
 
 
 
