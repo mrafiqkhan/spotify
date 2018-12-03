@@ -58,11 +58,13 @@ typings/
 .env
 
 
-
 # my personal ignores
 .vscode/
 gulpfile.js
 scss/
+music/
+#ignore .mp3 files
+.mp3
 
 package-lock.json
 

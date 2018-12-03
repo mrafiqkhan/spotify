@@ -14,6 +14,7 @@ class Song{
   private $path;
 
 
+
   public function __construct($con, $id){
     $this->con = $con;
     $this->id = $id;
@@ -56,6 +57,8 @@ public function getDuration(){
 public function getSongId(){
   return $this->id;
 }
+
+
 
 public static function updatePlayCount($con, $id){
 

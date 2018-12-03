@@ -11,9 +11,7 @@ $album = new Album($con, $_GET['id']);
 <?php include("includes/header.php");?>
 <!-- <h1 id="pageHeadingBig"></h1> -->
     <div id="gridViewContainer">
-
         <div class="album">
-
           <div class="albumHeader">
             <img src="<?php echo $album->getArtworkPath(); ?>" alt="">
           </div>
@@ -21,9 +19,7 @@ $album = new Album($con, $_GET['id']);
             <p class='albumTitle'><?php echo $album->getTitle(); ?></p>
             <p class="artistName">By: <?php echo $album->getArtist(); ?></p>
             <p><?php echo $album->getNumberOfSongs(); ?> songs</p>
-
           </div>
-
         </div>
         <div class="tracklistContainer">
           <ul class="trackList">
@@ -32,12 +28,7 @@ $album = new Album($con, $_GET['id']);
             foreach($songIds as $id){
                 $albumSong = new Song($con, $id);
                 echo "<li>{$albumSong->getTitle()}<span class='right'>{$albumSong->getDuration()}</span><br><span class='artistName'>{$albumSong->getArtist()}</span></li>";
-
-            }
-
-
-            ?>
-
+            }?>
           </ul>
         </div>
 

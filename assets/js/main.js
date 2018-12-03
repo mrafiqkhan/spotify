@@ -8,6 +8,7 @@
 // currentPlaylist = new Array(<?php echo  $jsonArray; ?>);
 
 // const nowPlayingBarContainer = document.querySelector("#nowPlayingBarContainer");
+let currentPlaylist = [];
 const mainProgressBar = document.querySelector("#mainProgressBar");
 const remaining = document.querySelector(".playbackBar .remaining");
 const current = document.querySelector(".playbackBar .current");
@@ -18,6 +19,8 @@ const albumThumbnail = document.querySelector(".albumLink img");
 const volume = document.querySelector(".volumeBar .progress");
 const volumeBtn = document.querySelector("#nowPlayingRight .volume");
 const muteBtn = document.querySelector("#nowPlayingRight .mute");
-let playingSongStatus;
-let currentTimeInterval;
-let remainingTimeInterval;
+const nextBtn = document.querySelector(".controlButton.next");
+const prevBtn = document.querySelector(".controlButton.previous");
+let playingSongStatus = null;
+let currentTimeInterval= null;
+let remainingTimeInterval = null;

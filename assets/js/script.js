@@ -64,7 +64,6 @@ function setTrack(trackId, newPlaylist, play) {
 
 function playSong(id) {
   if (audioElement.audio.currentTime === 0) {
-
     $.post("includes/handlers/ajax/getSongJson.php", {
       songId: id,
       calledFor: "updatePlayCount"
@@ -155,6 +154,20 @@ function muteSong() {
 function unmuteSong() {
   audioElement.unmuteSong();
 }
+
+function nextSong() {
+  let currentlyPlayingSong = currentPlaylist.indexOf(audioElement.currentlyPlaying.songId);
+  let next = (currentlyPlayingSong + 1) > currentPlaylist.length - 1 ? 0 : currentlyPlayingSong + 1;
+  setTrack(currentPlaylist[next], currentPlaylist, "play");
+  console.log(next);
+}
+
+function previousSong() {
+  let currentlyPlayingSong = currentPlaylist.indexOf(audioElement.currentlyPlaying.songId);
+  let previous = (currentlyPlayingSong - 1) < 0 ? currentPlaylist.length - 1 : currentlyPlayingSong - 1;
+  setTrack(currentPlaylist[previous], currentPlaylist, "play");
+  console.log(previous);
+}
 /* ============================================================================================ */
 /* ============================================================================================ */
 /* ============================================================================================ */
@@ -176,3 +189,5 @@ pauseButton.addEventListener("click", pauseSong);
 volume.addEventListener("click", setVolume);
 volumeBtn.addEventListener("click", muteSong);
 muteBtn.addEventListener("click", unmuteSong);
+prevBtn.addEventListener("click", previousSong);
+nextBtn.addEventListener("click", nextSong);
