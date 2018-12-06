@@ -78,7 +78,6 @@ function pauseSong() {
 }
 
 function checkSongStatus() {
-
   if (audioElement.audio.currentTime == audioElement.audio.duration) {
     audioElement.pause();
     audioElement.audio.currentTime = 0;
@@ -88,7 +87,6 @@ function checkSongStatus() {
     document.querySelector(".current .s").innerText = "00";
     document.querySelector(".remaining .m").innerText = "0";
     document.querySelector(".remaining .s").innerText = "00";
-
   }
 }
 
@@ -148,6 +146,11 @@ function setVolume(e) {
   volume.setAttribute("value", currentVolume);
 }
 
+<<
+<<
+<<
+< Updated upstream
+
 function muteSong() {
   audioElement.muteSong();
 }
@@ -155,6 +158,7 @@ function muteSong() {
 function unmuteSong() {
   audioElement.unmuteSong();
 }
+
 /* ============================================================================================ */
 /* ============================================================================================ */
 /* ============================================================================================ */
@@ -171,8 +175,12 @@ window.addEventListener("keyup", (e) => {
     }
   }
 });
+audioElement.audio.addEventListener("ended", () => {
+  if (currentPlaylist.length > 1) {
+    playNextSong();
+  }
+});
 mainProgressBar.addEventListener("click", forwardSong);
 pauseButton.addEventListener("click", pauseSong);
 volume.addEventListener("click", setVolume);
 volumeBtn.addEventListener("click", muteSong);
-muteBtn.addEventListener("click", unmuteSong);

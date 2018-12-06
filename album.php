@@ -31,6 +31,7 @@ $album = new Album($con, $_GET['id']);
 
             foreach($songIds as $id){
                 $albumSong = new Song($con, $id);
+<<<<<<< Updated upstream
                 echo "<li>{$albumSong->getTitle()}<span class='right'>{$albumSong->getDuration()}</span><br><span class='artistName'>{$albumSong->getArtist()}</span></li>";
 
             }
@@ -38,11 +39,16 @@ $album = new Album($con, $_GET['id']);
 
             ?>
 
+=======
+                echo "<li data-songId='{$albumSong->getSongId()}'><div>{$albumSong->getTitle()}<span class='right'>{$albumSong->getDuration()}</span><br><span class='artistName'>{$albumSong->getArtist()}</span></div><span class='addtoPlaylist'>+</span></li>";
+            }?>
+>>>>>>> Stashed changes
           </ul>
-        </div>
+        </span>
 
       </div>
 
 
 <?php  include "includes/footerTop.php";  ?>
+<script src="assets/js/album.js"></script>
 <?php include "includes/footer.php"; ?>

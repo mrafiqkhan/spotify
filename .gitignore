@@ -63,7 +63,9 @@ typings/
 .vscode/
 gulpfile.js
 scss/
-
+music/
+.mp3
+artwork/
 package-lock.json
 
 .jshintrc
