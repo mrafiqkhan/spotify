@@ -146,11 +146,6 @@ function setVolume(e) {
   volume.setAttribute("value", currentVolume);
 }
 
-<<
-<<
-<<
-< Updated upstream
-
 function muteSong() {
   audioElement.muteSong();
 }
