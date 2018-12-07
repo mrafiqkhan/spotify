@@ -2,7 +2,7 @@
 // document.createElement("audio");   this.setTrack = function (src){
 // this.audio.src = src;   } }
 
-// let currentPlaylist;
+let currentPlaylist;
 // let audioElement;
 
 // currentPlaylist = new Array(<?php echo  $jsonArray; ?>);
@@ -18,6 +18,7 @@ const albumThumbnail = document.querySelector(".albumLink img");
 const volume = document.querySelector(".volumeBar .progress");
 const volumeBtn = document.querySelector("#nowPlayingRight .volume");
 const muteBtn = document.querySelector("#nowPlayingRight .mute");
-let playingSongStatus;
+
+/* let playingSongStatus;
 let currentTimeInterval;
-let remainingTimeInterval;
+let remainingTimeInterval; */

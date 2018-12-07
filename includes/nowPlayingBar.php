@@ -1,13 +1,13 @@
 <?php
 $jsonArray = array();
-// $songQuery = mysqli_query($con, "SELECT id FROM songs ORDER BY RAND() LIMIT 10");
-// $resultArray = array();
+$songQuery = mysqli_query($con, "SELECT id FROM songs ORDER BY RAND() LIMIT 10");
+$resultArray = array();
 
-// while ($row = mysqli_fetch_array($songQuery)) {
-//     array_push($resultArray, $row['id']);
-// }
+while ($row = mysqli_fetch_array($songQuery)) {
+    array_push($resultArray, $row['id']);
+}
 
-// $jsonArray = json_encode($resultArray);
+$jsonArray = json_encode($resultArray);
 
 ?>
 <div id="nowPlayingBarContainer">
@@ -46,13 +46,13 @@ $jsonArray = array();
             </button>
         </div>
         <div class="playbackBar">
-          <span class="progressTime current"><span class="m">00</span><span>:</span><span class="s">00</span></span>
+          <span class="progressTime current"></span>
           <div class="progressBar">
             <div class="progressBarBg">
              <progress class="progress" id="mainProgressBar" value="0"></progress>
             </div>
           </div>
-          <span class="progressTime remaining"><span class="m">00</span>:<span class="s">00</span></span>
+          <span class="progressTime remaining"></span>
         </div>
         </div>
       </div>

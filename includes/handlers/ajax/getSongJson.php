@@ -18,3 +18,4 @@ if (isset($_POST['songId']) && isset($_POST['calledFor']) && $_POST['calledFor']
     $songId = $_POST['songId'];
     Song::updatePlayCount($con, $songId);
 }
+

@@ -1,8 +1,3 @@
-
-
-
-
-
 </head>
 <body>
   <div id="mainContainer">

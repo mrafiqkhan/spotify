@@ -6,7 +6,22 @@ function Audio() {
   this.isPlaying = false;
   this.isMuted = false;
   this.audio = document.createElement("audio");
-
+  this.audio.addEventListener("canplay", () => {
+    let duration = formatTime(this.audio.duration);
+    document.querySelector(".progressTime.remaining").innerText = duration;
+  });
+  this.audio.addEventListener("timeupdate", () => {
+    if (this.audio.duration) {
+      updateTimeProgressBar(this.audio);
+    }
+  });
+  this.audio.addEventListener("ended", () => {
+    // if (currentPlaylist.length > 1) {
+    //   // playNextSong();
+    // }
+    this.pause();
+    mainProgressBar.setAttribute('value', 0);
+  });
   this.setTrack = function (track) {
     this.currentlyPlaying = track;
     this.audio.src = "assets/music/" + track.path;
@@ -39,7 +54,7 @@ function Audio() {
     audioElement.audio.muted = false;
     muteBtn.style.display = "none";
     volumeBtn.style.display = "block";
-  }
+  };
 }
 
 function setTrack(trackId, newPlaylist, play) {
@@ -47,7 +62,7 @@ function setTrack(trackId, newPlaylist, play) {
   $.post("includes/handlers/ajax/getSongJson.php", {
     songId: trackId,
     calledFor: "setTrack"
-  }, function (data) {
+  }, (data) => {
     const track = JSON.parse(data);
     //  console.log(data);
     nowPlayingBarContainer.style.bottom = '0';
@@ -55,61 +70,41 @@ function setTrack(trackId, newPlaylist, play) {
     artistName.innerText = track.artist;
     albumThumbnail.src = track.albumImg;
     audioElement.setTrack(track);
-    songProgressBar();
+    // songProgressBar();
     playSong(track.id);
-    playingSongStatus = setInterval(checkSongStatus, 1000);
+    // playingSongStatus = setInterval(checkSongStatus, 1000);
   });
 
 }
 
-function playSong(id) {
-  if (audioElement.audio.currentTime === 0) {
+function formatTime(seconds) {
+  let time = Math.round(seconds);
+  let minutes = Math.floor(time / 60);
+  let second = time - (minutes * 60);
+  second = (second < 10) ? "0" + second : second;
+  return minutes + ":" + second;
+}
 
-    $.post("includes/handlers/ajax/getSongJson.php", {
-      songId: id,
-      calledFor: "updatePlayCount"
-    });
-  }
-  audioElement.play();
+function playSong(id) {
+
+  $.post("includes/handlers/ajax/getSongJson.php", {
+    songId: id,
+    calledFor: "updatePlayCount"
+  }, () => audioElement.play());
+
 }
 
 function pauseSong() {
   audioElement.pause();
 }
 
-function checkSongStatus() {
-  if (audioElement.audio.currentTime == audioElement.audio.duration) {
-    audioElement.pause();
-    audioElement.audio.currentTime = 0;
-    mainProgressBar.value = 0;
-    clearInterval(playingSongStatus);
-    document.querySelector(".current .m").innerText = "0";
-    document.querySelector(".current .s").innerText = "00";
-    document.querySelector(".remaining .m").innerText = "0";
-    document.querySelector(".remaining .s").innerText = "00";
-  }
-}
+function updateTimeProgressBar(audio) {
 
-function songProgressBar() {
-  const duration = audioElement.duration;
-  mainProgressBar.setAttribute('max', Math.floor(duration));
+  mainProgressBar.setAttribute('max', Math.floor(audio.duration));
+  mainProgressBar.setAttribute('value', Math.floor(audio.currentTime));
   mainProgressBar.style.width = (100 + "%");
-  currentTimeInterval = setInterval(getCurrentTime, 1000);
-  remainingTimeInterval = setInterval(getRemainingTime, 1000);
-
-}
-/* Track current played time of the song and update the progress bar according */
-function getCurrentTime() {
-  const currentTimeOfSong = audioElement.audio.currentTime;
-  const dur = audioElement.audio.duration;
-  const m = Math.floor(currentTimeOfSong / 60);
-  const s = Math.floor(currentTimeOfSong % 60);
-  mainProgressBar.setAttribute("max", Math.floor(dur));
-  mainProgressBar.setAttribute("value", Math.floor(currentTimeOfSong));
-  const currentTimeMin = document.querySelector(".current .m");
-  const currentTimeSec = document.querySelector(".current .s");
-  currentTimeSec.innerText = (s < 10 ? "0" + s : s);
-  currentTimeMin.innerText = m;
+  document.querySelector(".progressTime.current").innerText = formatTime(audio.currentTime);
+  document.querySelector(".progressTime.remaining").innerText = formatTime(audio.duration - audio.currentTime);
 }
 
 function forwardSong(e) {
@@ -117,18 +112,6 @@ function forwardSong(e) {
   const setProgressBar = Math.round(e.offsetX / (mainProgressBar.offsetWidth / mainProgressBar.max));
   mainProgressBar.value = setProgressBar;
   audioElement.audio.currentTime = setProgressBar;
-}
-
-function getRemainingTime() {
-  const currentTimeOfSong = audioElement.audio.currentTime;
-  const duration = audioElement.audio.duration;
-  const timeRemains = duration - currentTimeOfSong;
-  const m = Math.floor(timeRemains / 60);
-  const s = Math.floor(timeRemains % 60);
-  const remainingTimeMin = document.querySelector(".remaining .m");
-  const remainingTimeSec = document.querySelector(".remaining .s");
-  remainingTimeSec.innerText = (s < 10 ? "0" + s : s);
-  remainingTimeMin.innerText = m
 }
 
 function setVolume(e) {
@@ -142,7 +125,7 @@ function setVolume(e) {
 
   const currentVolume = setVolumeSize;
   const volumeWidth = volume.offsetWidth;
-  // console.log(`${currentVolume} ${volumeWidth} ${Math.round((setVolumeSize/147) * 100) / 100}`);
+
   volume.setAttribute("value", currentVolume);
 }
 
@@ -160,7 +143,9 @@ function unmuteSong() {
 /* ============================================================================================ */
 audioElement = new Audio();
 audioElement.muted = "muted";
-playButton.addEventListener("click", playSong);
+playButton.addEventListener("click", () => {
+  playSong(audioElement.currentlyPlaying.songId);
+});
 window.addEventListener("keyup", (e) => {
   if (e.keyCode === 32) {
     if (audioElement.isPlaying) {
@@ -170,12 +155,9 @@ window.addEventListener("keyup", (e) => {
     }
   }
 });
-audioElement.audio.addEventListener("ended", () => {
-  if (currentPlaylist.length > 1) {
-    playNextSong();
-  }
-});
+
 mainProgressBar.addEventListener("click", forwardSong);
 pauseButton.addEventListener("click", pauseSong);
 volume.addEventListener("click", setVolume);
 volumeBtn.addEventListener("click", muteSong);
+muteBtn.addEventListener('click', unmuteSong);
